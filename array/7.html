@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>const</title>
+</head>
+<body>
+    <script>
+        const URL = "google.com";   // const 不能改变内存地址的引用
+        //URL = "meta.com";         // TypeError: Assignment to constant variable.
+        function show() {
+            const URL = "baidu.com";
+            console.log(URL);         // diff scope can change
+        }
+        show();
+
+        const CONFIG = {name: "name"}; // const 可以改变对象的属性
+        CONFIG.name = "name2";
+        console.log(CONFIG);           // {name: "name2"}
+    </script>
+</body>
+</html>

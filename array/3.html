@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>var hoisting</title>
+</head>
+<body>
+    <script>
+        // var hello = "hello";
+        // console.log(hello);        // cannot output class is not commented
+        // keyword cnanot be used
+        // var class = "hello";
+
+        // console.log(web);             // undefined
+        // var web = "web";
+
+        // 相当于
+        /**
+         * var web;
+         * console.log(web);
+         * web = "web";
+         */
+
+        //  function hd() {
+        //     if (false) {
+        //         var web = "web";
+        //     }
+        //     console.log('web is', web);       // undefined
+        //  }
+        //  hd();
+
+        // let and const
+        // console.log(web);        
+        // let web = "web";    // error, cannot access 'web' before initialization
+        // console.log(app);
+        // const app = "app"; 
+         
+        // let web = "web";
+        // function hd() {
+        //     console.log(web);
+        //     // 没有下面这句，good；否则 error, tdz
+        //     let web = "web";  
+        // } 
+        // hd();
+
+        // a=b, b=3 error
+        function run(a=3, b=a) {
+            console.log(a, b);
+        }
+        run();
+    </script>
+</body>
+</html>

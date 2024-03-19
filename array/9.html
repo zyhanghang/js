@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量冻结</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        const HOST = {
+            url: 'https://google.com',
+            port: 443
+        }
+        HOST.port = 80;
+        console.log(HOST.port);  
+
+        // what if 不允许改变 obj
+        Object.freeze(HOST);
+        // "use strict"; 提示错误
+        console.log(HOST.port);  
+        HOST.port = 443;        // TypeError: Cannot assign to read only property 'port' of object '#<Object>'
+    </script>
+</body>
+</html>

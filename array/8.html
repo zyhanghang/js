@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win, Repeated Declaration</title>
+</head>
+<body>
+    <script>
+        // var web = "window_web";  
+        // console.log(window.web);   // web
+
+        // if declare screenLeft by accident
+        // var screenLeft = 100;      // the following will be fixed 100
+        // console.log(screenLeft);   // change during resize
+
+        let web = "window_web";
+        console.log(window.web);   // undefined
+
+        let screenLeft = 100;      // the following will change
+        console.log(window.screenLeft);  
+
+    </script>
+</body>
+</html>
