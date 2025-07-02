@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1, 2, 3];
+        console.log(arr);
+        let hd = {};
+        console.log(hd);
+        hd.__proto__.name = "hd";
+        console.log(hd.name);                        // hd
+
+        function User() {}
+        console.dir(User);
+        User.prototype.show = function() {
+            console.log("show");
+        }
+        let u = new User();
+        console.log(u);
+        // 构造函数 和 对象 使用的是一个原型对象
+        console.log(User.prototype === u.__proto__);     // true
+        console.log(User.prototype === User.__proto__);  // false   object != function
+        console.log(User.prototype.__proto__ === u.__proto__.__proto__);  // true
+        console.log(typeof User.prototype);           // object
+        console.log(typeof User.__proto__);           // function
+        console.log(typeof u.__proto__);              // object
+        console.log(typeof u.__proto__.__proto__);    // object
+        console.log(typeof User.prototype.__proto__); 
+        console.log(User.prototype); 
+        console.log(User.prototype.__proto__);
+
+        console.log(Object.prototype);
+        console.log(User.prototype.__proto__ === Object.prototype); // true
+
+        function People(name) {
+            this.name = name;
+        }
+        let p1 = new People("p1");
+        p1.__proto__.show = function() {
+            console.log("show by p1");
+        }
+        p1.show();
+        let p2 = new People("p2");
+        p2.show();                   // show by p1
+    </script>   
+</body>
+</html>

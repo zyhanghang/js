@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arrow</title>
+</head>
+<body>
+    <script>
+        let hd = () => {
+            return 1 + 2;
+        }
+        console.log(hd()); // 3
+
+        // let arr = [1, 2, 3, 4].filter((value, index) => {
+        //     return value <= 3;
+        // });
+        // 一个参数不用加括号
+        let arr = [1, 2, 3, 4].filter(value => value <= 3);
+        console.log(arr);
+
+        let sum = [1, 2, 3, 4].reduce((prev, cur) => prev + cur);
+        console.log(sum);
+    </script>
+</body>
+</html>

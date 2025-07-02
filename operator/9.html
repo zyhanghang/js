@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for in, for of</title>
+</head>
+<body>
+
+    <script>
+        let arr = ['a', 'b', 'c'];
+        for (let i in arr) {
+            console.log(i);         // 0, 1, 2
+            console.log(arr[i]);    // a, b, c
+        }   
+        for (let i of arr) {
+            console.log(i);         // a, b, c
+        }
+
+        let obj = {name: "Tom", age: 18};
+        for (let i in obj) {
+            console.log(i);         // name, age
+            console.log(obj[i]);    // Tom, 18
+        }
+        for (let i of obj) {       // error
+            console.log(i);         // error
+        }
+        for (let c of "hello") {
+            console.log(c);         // h, e, l, l, o
+        }
+
+
+        // for of is suitable for dom elements
+        // <rl> <li> <li> <li> <ul>
+    </script>
+</body>
+</html>

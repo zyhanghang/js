@@ -3,25 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>for</title>
+    <title>sort and iterator</title>
 </head>
 <body>
-    <script sec="6.js"></script>
     <script>
-        // var i = 99;
-        // for (var i = 0; i < 5; i++) {
-        //     console.log(i);
-        // }
-        // console.log(i);     // 5
+        let arr = [1, 6, 2, 9, 7];
+        arr.sort();
+        console.log(arr);
 
-        // var j = 99;
-        // for (let j = 0; j < 5; j++) {
-        //     console.log(j);
-        // }
-        // console.log(j);    // 99
+        arr.sort((a, b) => {
+            return b - a;
+        });
+        console.log(arr);
 
-        var web = "cur_web";  // 取决于 js 文件的位置，作用域互相影响
-        console.log(web);
+        console.log("--- forEach ---");
+        arr.forEach(function(item, index) {
+            console.log(`item=${item}, index=${index}`);
+        });
+
+        console.log("--- iterator ---");
+        arr = ["css", "js", "html"];
+        let keys = arr.keys();  
+        console.log(keys);                   // Array Iterator
+        //let {value, done} = keys.next();
+        //console.log(value, done);          // index, hasNext
+        while (({value, done} = keys.next()) && !done) { // 必须写成 value
+            console.log(value);              // 0, 1, 2
+        }
+        let values = arr.values();
+        while (({value, done} = values.next()) && !done) {
+            console.log(value);              // "css", "js", "html"
+        }
+        let entries = arr.entries();
+        // while (({value, done} = entries.next()) && !done) {
+        //     let [a, b] = value;
+        //     console.log(a, b);  
+        // }
+        for (const [key, value] of arr.entries()) {
+            console.log(key, value);
+        }
     </script>
 </body>
 </html>

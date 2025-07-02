@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+</head>
+<body>
+    <script>
+        // class User {}
+        //let hd = class {};
+
+        class User {
+            constructor(name) {
+                this.name = name;
+            }
+            show() {
+                return this.name;
+            }
+            get() {
+                console.log("hello");  
+            }
+        }
+        let hd = new User("xj");
+        hd.get();
+        console.log(hd.show());
+
+        console.log(typeof User);
+        console.log(User === User.prototype.constructor); // true
+        console.dir(User);                // show and get 在原型中
+        // 使用class时，原型中的方法是不可遍历的
+        console.log(
+            JSON.stringify(
+                Object.getOwnPropertyDescriptor(User.prototype, "show"), // enumerable: false
+                null,
+                2
+            )
+        );
+        
+    </script>
+</body>
+</html>

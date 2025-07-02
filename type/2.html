@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>string</title>
+</head>
+<body>
+    <script>
+        let s = new String("hello");
+        console.log(s);
+        console.log(s.length);
+        console.log(s.toString());
+        console.log(s.charAt(0), s.toString().charAt(0));
+
+        let str = "nihao";
+
+        // 转意
+        console.log("I'm \“a\" student");
+        
+        // 模板字符串 
+        let year = "2024";
+        let site = "www.bilibili.com";
+        console.log(site + " in " + year);
+        console.log(`${site} in ${year}`);   // better
+
+        function show() {
+            return "bili";
+        }
+        let bili_site = `www.${show()}.com`;  // template string
+        console.log(bili_site);
+
+        let lessons = [
+            {title: "math"},
+            {title: "english"},
+            {title: "chinese"}
+        ];
+        console.log(lessons.map(item => item.title)); // ["math", "english", "chinese"]
+        function template() {
+            return `<ul>
+                ${lessons.map(item => links`<li>${item.title}</li>`).join("")} 
+            </ul>`;
+        }
+        //document.body.innerHTML = template();
+
+        // 模板字符串 cont
+        let name = "Tom";
+        let age = 18;
+        console.log(tag`name: ${name}, age: ${age}`);
+        //function tag(strings, name, web) {
+        function tag(strings, ...vars) {
+            console.log(strings);
+            // console.log(name);
+            // console.log(age);
+            console.log(vars);
+        }
+
+        // 给 lesson title 加链接
+        function links(strings, ...vars) {  
+            console.log(strings);
+            console.log(vars);
+        }
+        document.body.innerHTML = template();
+    </script>
+</body>
+</html>

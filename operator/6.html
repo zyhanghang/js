@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch</title>
+</head>
+<body>
+    <script>
+        let name = 'video'; 
+        switch (name) {
+            case 'video':
+                console.log('video');
+                break;
+            case 'audio':
+                console.log('audio');
+                break;
+            default:
+                console.log('default');
+        }
+
+        function message(age) {
+            switch (true) {       // 只有为 true 时才会进 switch
+                case age > 60:
+                    console.log('old');
+                    break;
+                case age > 40:
+                    console.log('middle');
+                    break;
+                case age > 20:
+                    console.log('young');
+                    break;
+                default:
+                    console.log('default');
+            }
+        }
+        message(41);
+    </script>
+</body>
+</html>

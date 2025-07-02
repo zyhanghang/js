@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>scope</title>
+    <title>search element in array</title>
 </head>
 <body>
     <script>
-        "use strict";
-        var web = "origWeb";
-        function show() {
-            // after use strict, web is not defined if not declared
-            var web = "web";
-        }
-        show();
-        console.log(web);  // can print, 污染全局变量，可能function是另一个 js 文件的
+        let arr = [1, 2, 3, 2, 4];
+        console.log(arr.indexOf(2));     // 1
+        console.log(arr.lastIndexOf(2)); // 3
+        console.log(arr.includes(2));    // true
+
+        arr = [1, 2, 3, 10, 3];
+        let res = arr.find((item) => {
+            console.log(item);           // 1, 2, 3, 10
+            return item % 5 == 0;
+        });
+        console.log(res);
+
+        let lessons = [{name: 'js'}, {name: 'css'}, {name: 'html'}];
+        let status = lessons.find((item) => {
+            return item.name == 'css';
+        });
+        console.log(status);        // {name: 'css'}
+        status = lessons.findIndex((item) => {
+            return item.name == 'css';
+        });
+        console.log(status);        // 1 index
+
+        console.log("--- 原型链上定义查找方法 ---");
+        Array.prototype.findValue = function(callback) {
+            for (const value of this) {
+                if (callback(value)) 
+                    return value;
+            }
+            return undefined
+        };
+        status = arr.findValue(function(item) {
+            return item == 2;
+        });
+        console.log('findValue in prototype', status);      // 2
     </script>
 </body>
 </html>

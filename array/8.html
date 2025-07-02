@@ -3,22 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Win, Repeated Declaration</title>
+    <title>filter, map, reducet</title>
 </head>
 <body>
     <script>
-        // var web = "window_web";  
-        // console.log(window.web);   // web
+        console.log("--- filter ---");
+        let arr = ["a", "b", "12", "c", "567"];
+        let filtered_arr = arr.filter((item, index) => {   // 取部分数据，不改变原数组
+            return item.length == 1;
+        });
+        console.table(filtered_arr);
 
-        // if declare screenLeft by accident
-        // var screenLeft = 100;      // the following will be fixed 100
-        // console.log(screenLeft);   // change during resize
+        console.log("--- map ---");
+        let lessons = [
+            {title: "Javascript", views: 963},
+            {title: "Nodejs", views: 105},
+            {title: "React", views: 107}
+        ];
+        let lessons_views = lessons.map((lesson) => {           // 改变原数组
+            return {
+                title: `frontend-${lesson.title}`,
+                views: lesson.views + 10
+            };
+            //return Object.assign({cilck: 10}, value);           // 加新的属性，shallow copy
+        });
+        console.table(lessons);             // 原 obj 不变
+        console.table(lessons_views);       // 新的 obj 加了 10
+        
+        // 如果只是想改变原数组
+        lessons.map((lesson) => {
+            lesson.click = 100;
+        });
+        console.table(lessons);
 
-        let web = "window_web";
-        console.log(window.web);   // undefined
+        
+        console.log("--- reduce ---");
+        arr = [1];
+        let ans = arr.reduce((pre, value, index, arr) => {        // 累加
+            console.log(pre, value);                              // pre 被初始化为 0
+            return pre + value;
+        }, 0);                                                    // 如果没有设置初始值，pre 和 cur 是前两个数
+        console.log(ans);
 
-        let screenLeft = 100;      // the following will change
-        console.log(window.screenLeft);  
 
     </script>
 </body>

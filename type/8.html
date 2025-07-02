@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>date and timestamp</title>
+</head>
+<body>
+    <script>
+        let date = new Date();
+        console.log(date);
+        console.log(date.getFullYear());
+        console.log(date.getMonth());     // 0-11
+        console.log(date.getDate());      // 1-31 
+        console.log(date.getDay());       // 0-6    Thrusday 4 
+        console.log(date.getHours());
+        console.log(date.getMinutes());
+        console.log(date.getSeconds());
+        console.log(date.getMilliseconds());
+        console.log(date.getTime());
+
+        console.log(Date.now());          // timestamp in milliseconds
+
+        console.time("for");
+        for (let i = 0; i < 100000; i++) {
+            // do nothing
+        }
+        console.timeEnd("for");
+
+        console.log("---标准时间和时间戳的互相转换---");
+        let d = new Date("2024-3-21 12:00:00");
+        console.log(d * 1);
+        console.log(Number(d));
+        console.log(d.valueOf());
+        console.log(d.getTime());
+
+        let ts = d.getTime();
+        console.log(new Date(ts));
+
+        // thhird party library -> moment.js
+    </script>
+</body>
+</html>

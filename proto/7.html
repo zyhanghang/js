@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function User() {}
+        User.prototype.show = function() {
+            console.log("user.name");
+        };
+        User.prototype.site = function() {
+            console.log("user.site");
+        };
+
+        function Admin() {}
+        Admin.prototype = Object.create(User.prototype);
+        Admin.prototype.consturctor = Admin;
+        Admin.prototype.show = function() {       // 重写父类方法
+            User.prototype.site();
+            console.log("admin show");
+        }
+        
+        let a = new Admin();
+        a.show();
+
+        function B() {}
+        B.prototype = Object.create(User.prototype);
+        B.prototype.consturctor = B;
+        B.prototype.show = function() {
+            User.prototype.site();
+            console.log("b show");
+        }
+        let b = new B();
+        b.show();              // 多态
+    </script>
+</body>
+</html>

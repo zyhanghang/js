@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proxy</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name: 'hd',
+            age: 18
+        };
+        let proxy = new Proxy(obj, {
+            get(target, key) {
+                return key in target ? target[key] : 'default';
+            },
+            set(target, key, value) {
+                if (key === 'age') {
+                    if (!Number.isInteger(value)) {
+                        throw new TypeError('age is not an integer');
+                    }
+                }
+                target[key] = value;
+            }
+        });
+        console.log(proxy.name); // hd
+        console.log(proxy.age);  // 18
+
+        console.log("--- 使用代理控制函数 ---");
+        function factorial(num) {
+            return num == 1 ? 1 : num * factorial(num - 1);
+        }
+        let prxoy2 = new Proxy(factorial, {
+            apply(func, obj, args) {
+                console.time('time');
+                let result = func.apply(this, args);
+                console.timeEnd('time');
+            }
+        });
+        prxoy2.apply(null, [1000]);
+    </script>
+</body>
+</html>

@@ -3,52 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>var hoisting</title>
+    <title>array CRUDt</title>
 </head>
 <body>
     <script>
-        // var hello = "hello";
-        // console.log(hello);        // cannot output class is not commented
-        // keyword cnanot be used
-        // var class = "hello";
+        console.log("--- add ---");
+        let arr = ["1", "2", "3"];
+        arr[arr.length] = "4";
+        arr[arr.length] = "5";
+        console.log(arr);
 
-        // console.log(web);             // undefined
-        // var web = "web";
+        arr = [...arr, "6"];
+        console.log(arr);
 
-        // 相当于
-        /**
-         * var web;
-         * console.log(web);
-         * web = "web";
-         */
+        arr.push("7");
+        arr.push("8", "9");
+        console.log(arr);
 
-        //  function hd() {
-        //     if (false) {
-        //         var web = "web";
-        //     }
-        //     console.log('web is', web);       // undefined
-        //  }
-        //  hd();
+        arr.push(...["10", "11"]);  // 展开
+        console.log(arr);
 
-        // let and const
-        // console.log(web);        
-        // let web = "web";    // error, cannot access 'web' before initialization
-        // console.log(app);
-        // const app = "app"; 
-         
-        // let web = "web";
-        // function hd() {
-        //     console.log(web);
-        //     // 没有下面这句，good；否则 error, tdz
-        //     let web = "web";  
-        // } 
-        // hd();
+        console.log("--- delete ---");
+        console.log(arr.pop());     // "11"
+        console.log(arr.shift());   // "1" 从前面移出
+        console.log(arr.unshift("1")); // 10 从前面压入
+        console.log(arr); 
 
-        // a=b, b=3 error
-        function run(a=3, b=a) {
-            console.log(a, b);
-        }
-        run();
+        console.log("--- slice and splice ---");
+        arr = [1, 2, 3, 4, 5];
+        arr1 = arr.slice(1, 3);
+        console.log(arr1);        
+        console.log(arr);
+
+        arr2 = arr.splice(1, 3);  // 截几个
+        console.log(arr2);
+        console.log('origArr', arr);   // 原数组变了
+
+        arr3 = arr.splice(1, 1, "new");
+        console.log(arr3);        // 5
+        console.log(arr);         // [1, "new"]
+
+        console.log("--- clear array ---");
+        let clarr = ["1", "3", "5"];
+        //clarr = [];         // 如果 a = ["1"], b = a, a = [] 新的空间
+        clarr.length = 0;     // 原数组数据清空
+        console.log(clarr);
+
     </script>
 </body>
 </html>

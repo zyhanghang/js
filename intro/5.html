@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scope</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        var web = "origWeb";
+        function show() {
+            // after use strict, web is not defined if not declared
+            var web = "web";
+        }
+        show();
+        console.log(web);  // can print, 污染全局变量，可能function是另一个 js 文件的
+    </script>
+</body>
+</html>

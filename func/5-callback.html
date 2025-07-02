@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback</title>
+</head>
+<body>
+    <button id="bt">submit</button>
+    <script>
+        let bt = document.getElementById("bt");
+        // addEventListener is a function
+        // the function inside addEventListener is a callback function
+        bt.addEventListener("click", function () {
+            console.log("click");
+        });
+
+        // 1. callback
+        function show(title, callback) {
+            console.log(title);
+            callback();
+        }
+        show("title", function () {
+            console.log("callback");
+        });
+
+        // 2. callback hell
+        function show2(title, callback) {
+            console.log(title);
+            callback();
+        }
+        show2("title", function () {
+            console.log("callback");
+            show2("title2", function () {
+                console.log("callback2");
+                show2("title3", function () {
+                    console.log("callback3");
+                });
+            });
+        });
+
+        // 3. promise
+        function show3(title) {
+            return new Promise((resolve, reject) => {
+                console.log(title);
+                resolve();
+            });
+        }
+        show3("title").then(() => {
+            console.log("callback");
+            return show3("title2");
+        }).then(() => {
+            console.log("callback2");
+            return show3("title3");
+        }).then(() => {
+            console.log("callback3");
+        });
+
+        // 4. async
+        async function show4(title) {
+            console.log(title);
+            return title;
+        }
+        show4("title").then((title) => {
+            console.log(title);
+        });
+
+        // 5. async + await
+        async function show5(title) {
+            console.log(title);
+            return title;
+        }
+        async function show6() {
+            let title = await show5("title");
+            console.log(title);
+        }
+        show6();
+    </script>
+</body>
+</html>

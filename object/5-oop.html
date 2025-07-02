@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP</title>
+</head>
+<body>
+    <script>
+        // 1. 封装
+        function User(name, age) {
+            // 闭包特性，导致 show 可以访问到 User 的属性
+            let data = { name, age };
+            let info = function() {
+                return data.age > 50 ? "老年人" : "年轻人";
+            };
+            this.show = function() {
+                console.log(data.name + " 是 " + info());
+            }
+        }
+        let zyh = new User("lihua", 30);
+        zyh.show();  // zyh 是 年轻人
+        //console.log(zyh.data);  // undefined
+        //zyh.data.name = "zyh2"; // TypeError: Cannot set property 'name' of undefined
+
+        console.log("--- 属性控制 ---");
+        let user = {
+            name: "lilei",
+            age: 30,
+        };
+        console.log(
+            JSON.stringify(Object.getOwnPropertyDescriptor(user, "name"), null, 2)
+        );
+        console.log(
+            JSON.stringify(Object.getOwnPropertyDescriptors(user), null, 2)
+        );
+        Object.defineProperty(user, "name", {
+            writable: false,
+            value: "lilei2",
+            enumerable: false,
+            configurable: false
+        });
+        user.name = "lilei3"; // 严格模式下会报错
+        console.log(
+            JSON.stringify(Object.getOwnPropertyDescriptors(user), null, 2)
+        );
+        for (let key in user) {
+            console.log(key); // 只能访问 age，因为 name 属性设置了 enumerable 为 false
+        }
+        delete user.name;     // 严格模式下会报错
+        // Object.defineProperties 可以对多个属性进行设置
+
+        console.log("--- 属性控制方法 ---");
+        let user2 = {
+            name: "lilei",
+            age: 30,
+        };
+        Object.preventExtensions(user2);  // 不允许添加新属性
+        user2.gender = "male";
+        console.log(user2);
+        console.log(Object.isExtensible(user2));  // false
+
+        Object.seal(user2);  // 不允许添加新属性，不允许删除属性, configurable 为 false
+        console.log(
+            JSON.stringify(Object.getOwnPropertyDescriptors(user2), null, 2)
+        );
+        console.log(Object.isSealed(user2));  // true
+
+        Object.freeze(user2);  // 不允许添加新属性，不允许删除属性，不允许修改属性, configurable, writable 都为 false
+        console.log(Object.isFrozen(user2));  // true
+
+        console.log("--- 访问器 ---");
+        const user3 = {
+            data: {
+                name: "lilei",
+                age: 30
+            },
+            set age(value) {
+                if (value > 0 && value < 200) {
+                    this.data.age = value;
+                } else {
+                    throw new Error("年龄不合法");
+                }
+            },
+            get age() {
+                return this.data.age;
+            }
+        }
+        user3.age = 100;
+        console.log(user3.age);
+
+        localStorage.setItem("name", "lilei"); // Application -> Local Storage
+
+        console.log("--- 访问器优先级 ---");
+        // const DATA = Symbol();
+        let user4 = {
+            // [DATA]: { name }
+            name: "lilei",
+            set name(value) {
+                console.log(value);
+            }
+        }
+        user4.name = "hanhan";  // hanhan, set 方法优先级高于 name 属性
+
+        console.log("--- 构造函数与class中使用 访问器 ---");
+        function Userr(name, age) {
+            let data = { name, age };
+            Object.defineProperties(this, {
+                name: {
+                    get() {
+                        return data.name;
+                    },
+                    set(value) {
+                        data.name = value;
+                    }
+                },
+                age: {
+                    get() {
+                        return data.age;
+                    },
+                    set(value) {
+                        data.age = value;
+                    }
+                }
+            });
+        }
+        let u1 = new Userr("lilei", 30);
+        console.log(u1);
+
+        class Userrr {
+            constructor(name, age) {
+                this.data = { name, age };
+            }
+            get name() {
+                return this.data.name;
+            }
+            set name(value) {
+                this.data.name = value;
+            }
+            get age() {
+                return this.data.age;
+            }
+            set age(value) {
+                this.data.age = value;
+            }
+        }
+    </script>
+</body>
+</html>

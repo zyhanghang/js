@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>string method</title>
+</head>
+<body>
+    <script>
+        let s = "hello";
+        console.log(s.length);  // 5
+        console.log(s.charAt(1));   // e
+        console.log(s.charCodeAt(1));   // 101
+        console.log(s.indexOf('l'));    // 2
+        console.log(s.lastIndexOf('l'));    // 3
+        console.log(s.startsWith('he'));    // true
+        console.log(s.endsWith('lo'));    // true
+        console.log(s.includes('ll'));    // true
+        console.log(s.toUpperCase());    // HELLO
+        console.log(s.toLowerCase());    // hello
+        console.log(s.replace('l', 'L'));    // heLlo
+        console.log(s.split('l'));    // [ 'he', '', 'o' ]
+        console.log(s.trim());    // hello
+
+        // 截取
+        s = "helloworld";
+        console.log(s.substring(2, 4));    // ll       不能填负数
+        console.log(s.slice(2, 4));    // ll
+        console.log(s.substr(2, 4));   // llow  截取几个
+
+        console.log(s.slice(-3, -1));  // rl
+        console.log(s.substr(-3, 2));  // rl
+
+        // 查找
+        console.log(s.indexOf('l'));        // 2
+        console.log(s.lastIndexOf('l'));    // 8
+        console.log(s.indexOf('h', 1));     // -1
+        console.log(s.includes('h', 1));    // false
+
+        let words = ["java", "python", "c++"];
+        let str = "I like java, python, go";
+        words.some(word => {
+            console.log(word);
+            return str.includes(word);     // 匹配 java 后不会继续
+        });    // true
+    </script>
+</body>
+</html>

@@ -3,25 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>var let const</title>
+    <title>split and join</title>
 </head>
 <body>
     <script>
-        // var web = "web";  // let var const 一致，函数内可以访问全局变量
-        // function show() {
-        //     console.log('func', web);
-        // }
-        // show();
-        // console.log(web);     
-        
-        var web = "web-out";          // let const 一致
-        function show() {
-            //var web = "web-in";       // 里外不同
-            web = "web-in";             // 里外相同 都是 web-in
-            console.log('func', web);
-        }
-        show();
-        console.log('outter', web);       
+        let url = "search.jd.com";
+        let arr = url.split(".");
+        console.log(arr);
+        let append = ["test", "append"];
+        // let new_arr = arr.concat(append);
+        let new_arr = [...arr, ...append];
+        console.log(new_arr);
     </script>
 </body>
 </html>

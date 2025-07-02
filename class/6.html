@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静态继承</title>
+</head>
+<body>
+    <script>
+        // function User() {}
+        // User.site = "hd";
+        // User.show = function() {
+        //     console.log("static method in User");  
+        // }
+
+        // function Admin() {}
+        // Admin.__proto__ = User;
+        // console.dir(Admin);
+        // Admin.show();
+
+        class User {
+            static side = "houdunren";
+            static show() {
+                console.log("user.staic show");
+            }
+        }
+        class Admin extends User {}
+        console.dir(Admin);
+
+        // 继承关系判断
+        let ad = new Admin();
+        console.log(ad instanceof Admin); // true
+        console.log(ad instanceof User);  // true
+
+        console.log(Admin.prototype.isPrototypeOf(ad)); // true
+        console.log(User.prototype.isPrototypeOf(ad));  // true
+    </script>
+</body>
+</html>

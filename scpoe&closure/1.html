@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scope</title>
+</head>
+<body>
+    <script>
+        // 1. 作用域
+        // 1.1 全局作用域
+        let hd = "hd";
+        function show() {
+            console.log(hd);
+        }
+        show();  // hd
+
+        // 1.2 局部作用域
+        function show2() {
+            let hd2 = "hd2";
+            console.log(hd2);
+        }
+        show2();  // hd2
+        // console.log(hd2);  // ReferenceError: hd2 is not defined
+
+        // 1.3 块级作用域
+        if (true) {
+            let hd3 = "hd3";
+            console.log(hd3);
+        }
+        // console.log(hd3);  // ReferenceError: hd3 is not defined
+
+        // 1.4 函数作用域
+        function show3() {
+            let hd4 = "hd4";
+            console.log(hd4);
+        }
+        show3();  // hd4
+        // console.log(hd4);  // ReferenceError: hd4 is not defined
+
+        // 1.5 作用域链
+        let hd5 = "hd5";
+        function show4() {
+            let hd5 = "hd5_in";
+            function show5() {
+                let hd5 = "hd5_in_in";
+                console.log(hd5);
+            }
+            show5();  // hd5_in_in
+        }
+        show4();
+
+        // 2. 闭包
+        console.log("--- 闭包 ---");
+        function show6() {
+            // let hd6 = "hd6";
+            let n = 1;
+            function show7() {
+                console.log(++n);
+            }
+            return show7;
+        }
+        let hd7 = show6();     
+        hd7();                 // hd6 // 2
+        hd7();                 // hd6 // 3
+        let hd71 = show6();    // 每调一次函数会产生新的内存地址
+        hd71();
+
+
+        function multiClosure() {
+            let n = 1;
+            return function sum() {  
+                let m = 1;
+                return function show() {
+                    console.log("n", ++n);
+                    console.log("m", ++m);
+                }
+            }
+        }
+        let hd72 = multiClosure();
+        hd72()();    // 第一个括号是返回show函数，第二个括号是调用show函数
+        hd72()();    // m 不变，n 变， hd72()() 会产生新的内存地址 for m
+        // 以上两行的 两个 hd72() 返回了连个不同内存地址的 show 函数，执行后 m 不会变
+        let hd73 = multiClosure()();
+        hd73();
+        hd73();      // m 变，n 变
+
+        // 3. 闭包的应用
+        console.log("--- 闭包的应用 ---");
+        function add() {
+            let count = 0;
+            return function() {
+                count++;
+                console.log(count);
+            }
+        }
+        let hd8 = add();
+        hd8();  // 1
+        hd8();  // 2
+        hd8();  // 3
+
+        // 4. 闭包的缺点
+    </script>
+</body>
+</html>

@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!---if this is a time consuming op, body will not load immediately-->
-    <!-- <script src="1.js"></script> -->
+    <title>array ref type</title>
 </head>
 <body>
-    <h1>first</h1>
-    <h2>second</h2>
     <script>
-        const a = 1;
-        const b = 2;
-        document.write("a+b=", a+b);
-        // comment
-        /**
-         * multi line comment
-         */
+        const array = new Array("hello", "nihao");
+        console.log(array);
+        console.log(array.join('|'));
+
+        let arr = [1, 2, 3, 4];
+        console.log(arr);
+        console.log(typeof arr); //object
+        console.table(arr);
+        
+        console.log("---multi dimension array---");
+        let multi = [["a", "b"], ["c"]];
+        console.log(multi[0][1]);
+        let lessons = [{name: "java", star: 5}, {name: "python", star: 8}];
+        console.table(lessons);
+        console.log(lessons[0].name);
+
+        console.log("--- Array.of ---");
+        let hd = ["1"];
+        hd[3] = ["4"];
+        console.log(hd.length);  // 4
+        console.log(hd);         
+        console.log(hd[1]);      //  undefined
+
+        let cms = new Array(1, 23, 45, 67);
+        console.log(cms);
+        cms = new Array(6);
+        console.log(cms);        // empty * 6
+        
+        let arr1 = Array.of(6);  
+        console.log(arr1);       // [6]
     </script>
-    <script src="1.js"></script>
 </body>
 </html>

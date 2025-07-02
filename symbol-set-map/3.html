@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map and weakmap</title>
+</head>
+<body>
+    <script>
+        // obj 的 key 只能是字符串，如果是对象，会转化成字符串
+        // map 的 key 可以是任意类型
+        let map = new Map();
+        let obj = {p: "Hello World"};
+        map.set(obj, "content");
+        console.log(map.get(obj));  // "content"
+
+        // 支持链式操作
+        map.set("a", 1).set("b", 2).set("c", 3);
+        console.log(map);
+
+        // CRUD
+        console.log("--- CRUD ---");
+        map.set("d", 4);
+        console.log(map.get("d"));
+        console.log(map.has("d"));      // true
+        console.log(map.delete("d"));   // true
+
+        // 遍历
+        map = new Map([["name", "lilei"], ["age", 18]]);
+        // map.keys() 返回一个遍历器对象
+        // map.values() 返回一个遍历器对象
+        // map.entries() 返回一个遍历器对象
+        for (let [key, value] of map) {
+            console.log(key, value);
+        }
+        map.forEach((value, key) => {    // key在后
+            console.log(key, value);
+        });
+
+        // 类型转换
+        // map 转为数组, 可以用数组的方法 filter, map, reduce
+        console.log("--- type conversion ---");
+        console.log([...map]);
+        console.log([...map.keys()]);
+        console.log([...map.values()]);
+
+
+        console.log("--- weakmap ---");
+        let wm = new WeakMap();
+        let arr = [];
+        wm.set(arr, "Hello World");
+        arr = null;
+        console.log(wm);
+        console.log(wm.get(arr));      // undefined
+        setTimeout(() => {
+            console.log(wm);
+        }, 10000);
+    </script>
+</body>
+</html>

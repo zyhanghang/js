@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+<body>
+    <button>submit</button>
+    <script>
+        // 1. this 作为当前对象的引用
+        let hd = {
+            name: "hd",
+            show: function() {
+                console.log(this.name);  // 因为函数是对象的方法，所以 this 指向当前对象
+            }
+        };
+        hd.show();  // hd
+
+        // 2. this 作为全局环境的引用
+        console.log(window);
+        console.log(this);  
+        console.log(window == this);
+
+        // 3. 
+        this.name = "window_name";
+        hd = {
+            name: "hd",
+            show: function() {
+                console.log(this.name);      // 因为函数是对象的方法，所以 this 指向当前对象
+                function showInside() {      
+                    console.log("showInside", this);  
+                    console.log(this.name);
+                }
+                showInside();                // this 指向全局环境 window
+            }
+        };
+        hd.show();                          // hd
+ 
+        // 4. 
+        function User() {
+            //this.name = "lilei";
+            this.name = name; // window 的 name 赋值给 user 的 name
+            this.show = function() {
+                console.log(this.name);
+            };
+        }
+        let user = new User();
+        user.show();                        // lilei
+
+        // 5. 通过常量改变 this 的指向
+        let hd2 = {
+            site: "hd2",
+            lists: ["js", "css", "html"],
+            show: function() {
+                // const self = this;                          // 传统方法
+                // return this.lists.map(function(item) {
+                //     //console.log(this);                    // this 指向全局环境 window
+                //     //console.log(this.site);               // undefined
+                //     console.log(self.site);                 // hd2
+                //     return `${self.site} knows ${item}`;
+                // });
+
+                // map 函数有第二个参数，赋值给 callback func 的 this
+                return this.lists.map(function(item) {
+                    return `${this.site} knows ${item}`;
+                }, this);
+            }
+        };
+        console.table(hd2.show());
+
+        // 6. 箭头函数给 this 带来的变化
+      
+        hd2 = {
+            site: "hd2-arrow",
+            lists: ["js", "css", "html"],
+            show: function() {
+                // 指向当前对象
+                return this.lists.map(item => {
+                    return `${this.site} knows ${item}`;
+                });
+            }
+        };
+        console.table(hd2.show());
+
+        console.log("--- 什么时候需要 callback 的this指向全局 ---");
+        hd2 = {
+            site: "hd2-arrow",
+            lists: ["js", "css", "html"],
+            bind: function() {
+                const button = document.querySelector("button");
+                // button.addEventListener("click", function() {
+                //     console.log(this);  // button
+                // });
+                // button.addEventListener("click", () => {
+                //     console.log(this);     // hd2
+                // });
+                // 如果同时想要 button 和 hd2
+                button.addEventListener("click", (event) => {
+                    // 此时 this 指向 hd2 对象，event 指向 button
+                    console.log(event.target);
+                    console.log(this);
+                });
+            }
+        };
+        hd2.bind();
+
+    </script>
+</body>
+</html>

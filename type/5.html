@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>boolean</title>
+</head>
+<body>
+    <script>
+        const b = new Boolean(true);
+        console.log(typeof b);       // object
+        console.log(b.valueOf());    // true
+        //b = false;                   // TypeError: Assignment to constant variable.
+        let c = false;
+        console.log(typeof c);      // boolean
+
+        let num = 99;
+        if (num) {                 // 99 is true
+            console.log(num);
+        }
+
+        console.log("---string---");
+        let t = "11";
+        console.log(t == true);  // false
+        console.log(Number(t) == true); // false
+        console.log("1" == true); // true
+        console.log(Boolean(t)); // true
+        if (t) {                 // 表达式运算时成立
+            console.log(t);      // 11
+        }
+
+        console.log("---array---");
+        let arr = [];
+        console.log(Number(arr)); // 0
+        console.log(arr == true); // false
+        if (arr) {
+            console.log("empty arary");     // 应用类型转换成 boolean 时，都为 true，比如 {}
+        }
+        arr = [2];
+        console.log(Number(arr)); // 2
+        console.log(arr == true); // false
+        if (arr) {
+            console.log(arr);
+        }
+        arr = [1];
+        console.log(Number(arr)); // 1
+        console.log(arr == true); // true
+        arr = [1, 2, 3];
+        console.log(Number(arr)); // NaN
+        console.log(arr == true); // false
+        if (arr) {                 // 表达式运算时成立
+            console.log(arr);      // 1,2,3
+        }
+
+        console.log("---显示转换---");
+        let num1 = 0;
+        console.log(typeof num1);   // number
+        number = !!num1; 
+        console.log(typeof number); // boolean
+        console.log(typeof Boolean(num1)); // boolean
+    </script>
+</body>
+</html>

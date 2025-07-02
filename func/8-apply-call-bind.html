@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>apply, call, bind</title>
+</head>
+<body>
+    <script>
+        console.log("--- this 可被改变 ---");
+        function User(name) {
+            this.name = name;
+        }
+        let user1 = new User("lilei");
+        let other = {
+            skill: "js"
+        };
+        // other 对象调用 user1 的方法
+        // 此时 User 的 this 变成了 other 对象
+        User.call(other, "hanmeimei"); 
+        console.log(other);
+
+        console.log("--- apply ---");
+        let lilei = {
+            name: "lilei"
+        };
+        let hanmeimei = {
+            name: "hanmeimei"
+        };
+        function showUser(web, url) {
+            console.log(web, url, this.name);
+        }
+        // call 和 apply 的区别在于参数的传递方式
+        showUser.call(lilei, "web-li", "li.com");               // lilei 会立即执行
+        showUser.apply(hanmeimei, ["web-han", "han.com"]);      // hanmeimei 会立即执行
+
+        // eg
+        let arr = [1, 2, 3, 4, 5];
+        console.log(Math.max.apply(Math, arr)); 
+        console.log(Math.max(...arr));          
+
+
+        console.log("--- 属性继承 ---");
+        function Request(params) {
+            this.get = function(params) {
+                // id=1&cat=js
+                let query = Object.keys(params).map(key => `${key}=${params[key]}`).join("&");
+                console.log(`${this.url}?${query}`);
+            };
+        }
+        function Artical() {
+            this.url = "artical/lists";
+            // this.get = function(params) {
+            //     // id=1&cat=js
+            //     let query = Object.keys(params).map(key => `${key}=${params[key]}`).join("&");
+            //     console.log(`${this.url}?${query}`);
+            // };
+            Request.call(this);
+        }
+
+        let a = new Artical();
+        a.get({id: 1, cat: "js"});
+
+
+        console.log("--- bind ---");
+        // call 和 apply 是立即执行的，bind 是返回一个函数
+        function show() {
+            console.log(this.name);
+        }
+        show.call({name: "lilei"});         // lilei
+        let han = show.bind({name: "hanmeimei"});    // hanmeimei
+        han();
+    </script>
+</body>
+</html>

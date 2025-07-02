@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修正字符</title>
+</head>
+<body>
+    <script>
+        let hd = `hoUdUnren
+            uxyhd
+        `;
+        console.log(hd.match(/u/i)); // 不区分大小写 
+        console.log(hd.match(/u/s)); // 换行也能匹配，视为一个str   m 是每一行单独对待
+        console.log(hd.match(/U/g)); // 可匹配多个
+        console.log(hd.match(/u/gis)); // 组合使用
+
+        // https://www.php.net/manual/en/regexp.reference.unicode.php
+        hd = "houdun2024.com你好";      
+        console.log(hd.match(/\p{L}/gu));   // 字符属性有 L     gu 表示全局匹配 + Unicode
+        console.log(hd.match(/\p{P}/gu));   // 标点符号属性 P
+        console.log(hd.match(/\p{sc=Han}/gu)); // 你好
+
+        let reg = /\w/g;
+        console.log(reg.lastIndex); // 0
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.lastIndex); // 3
+
+        console.log("--- y模式 ---");
+        hd = "uu22bb";
+        reg = /u/y;
+        console.log(reg.exec(hd));
+        console.log(reg.lastIndex); // 1
+        console.log(reg.exec(hd));
+        console.log(reg.lastIndex); // 2
+        console.log(reg.exec(hd));  // null
+        console.log(reg.lastIndex); // 0      连续匹配失败，回到起始点
+        console.log(reg.exec(hd));  
+        console.log(reg.lastIndex); // 1
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>closure</title>
+</head>
+<body>
+    <div desc="a">hello</div>
+    <div desc="b">world</div>
+    <script>
+        // 一个函数的作用域，可以访问到其他函数的作用域
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        function between(a, b) {
+            return function(v) {
+                return v >= a && v <= b;
+            };
+        }
+        // between 函数返回的是 里面的 function, 但是同时可以访问到父级作用域
+        console.log(arr.filter(between(2, 8)));
+
+
+        // 闭包带来的内存泄漏问题
+        let divs = document.querySelectorAll("div");
+        divs.forEach(function(item) {
+            let desc = item.getAttribute("desc");
+            item.onclick = function() {
+                //console.log(.getAttribute("desc"));  // 每次都能取 parent scope item 的值，消耗内存
+                console.log(desc);
+                console.log(item);
+            };
+            item = null; // 释放内存
+        });
+
+        // this 在闭包中的问题
+        let hd = {
+            user: "hd",
+            show: function() {
+                console.log(this.user);
+            },
+            get: function() {
+                // return function() {
+                //     console.log(this.user);  // this 指向全局环境 window
+                // };
+                // 如何解决
+                return () => {
+                    console.log(this.user);  // this 指向当前对象
+                };
+            }
+        };
+        let a = hd.get();
+        a();          // undefined, user is not an attribute in window，使用箭头函数解决
+            
+    </script>
+</body>
+</html>

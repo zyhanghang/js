@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chain</title>
+</head>
+<body>
+    <button class="btn">按钮1</button>
+    <button message="msg">按钮2</button>
+    <script>
+        let hd = {
+            data: [1, 2, 3, 34, 5, 7]
+        };
+        Object.setPrototypeOf(hd, {
+            // max() {
+            //     return this.data.sort((a, b) => b - a)[0];
+            // }
+            max(data) {
+                return data.sort((a, b) => b - a)[0];
+            }
+        });
+        console.log(hd.max(hd.data));  // 34
+
+        let xj = {
+            lessons: { js: 87, php: 63, node: 99, linux: 88 },
+            // get data () {
+            //     return Object.values(this.lessons);    
+            // }
+        }
+        // 借用hd原型链的方法 实现 xj lessons 的最大值
+        //console.log(hd.max.apply(xj));  
+        //console.log(hd.max.apply(null, Object.values(xj.lessons)));  // data.sort is not a function
+        console.log(hd.max.call(null, Object.values(xj.lessons)));  // 99
+
+        console.log("--- DOM节点借用Array的原型方法 ---");
+        let btns = document.querySelectorAll('button');
+        console.log(btns.prototype);                 // undefined                
+        // btns.filter(item => {                     // btns.filter is not a function
+        //     return item.hasAttribute('class');         
+        // });
+        console.log(btns[0].innerHTML);  // 按钮1
+        btns = Array.prototype.filter.call(btns, item => {
+            return item.hasAttribute('class');         
+        });
+        console.log(btns[0].innerHTML);  // 按钮1
+
+    </script>
+</body>
+</html>

@@ -3,32 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>var declare</title>
+    <title>array 类型转换</title>
 </head>
 <body>
+    <div>test1</div>
+    <div>test2</div>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
     <script>
-        // var web = "web";
-        // var $s = "s";      // don't use $ in var since JQuery uses it
-        // console.log(web + $s);
+        let arr = [1, 2, 3];
+        console.log(Array.isArray([]));
+        console.log(arr.toString());
+        console.log(arr.join('-'));
 
-        // var a = "a", b = "b", c = "c";
-        // console.log(a, b, c);
+        let str = "biliworld";
+        console.log(Array.from(str));
 
-        // name name name
-        // var name1 = name2 = name3 = "name";
-        // console.log(name1, name2, name3);
+        let divs = document.querySelectorAll("div");
+        console.log(divs);
+        console.log(Array.from(divs));   // array
+        Array.from(divs, (item) => item.style.backgroundColor = "red"); // Array.from 有第二个参数
 
-        // undefined undefined name
-        // var a, b, c = "name";
-        // console.log(a, b, c);
-        
-        // number, string, object
-        var a = 1;
-        console.log(typeof a);
-        a = "1";
-        console.log(typeof a);
-        a = {};
-        console.log(typeof a);
-    </script>
+        console.log("--- 展开 ---");
+        arr = ["slc", "lvc", "mtv"];
+        let others = ["nyc", "la", "sf"];
+        console.log([...arr, ...others]);
+
+        function sum(...args) {
+            return args.reduce((s, v) => {
+                console.log('var', v);
+                return s += v;
+            }, 0);
+        }
+        console.log(sum(1, 2, 3));
+
+        console.log("--- 展开在 DOM 中使用 ---");
+        Array.from(divs).map(item => {
+            console.log(item);
+        });
+        Array.prototype.map.call(divs, item => {
+            item.style.backgroundColor = "green";
+            console.log(item);
+        });
+        [...divs].map(item => {
+            item.addEventListener("click", 
+                function() {
+                    this.classList.toggle("hide");
+                }
+//                () => this.classList.toggle("hide") not work
+            )
+        });
+
+        console.log("--- 解构赋值 ---");
+        arr = ["hello", 2024];
+        let [name, year] = arr;
+        let [, year1] = arr;
+        console.log(`${name}*${year}`);
+        console.log(year1);
+        console.log(..."hello");
+        const [...h1] = "hello";
+        console.log(typeof h1, h1);
+    </script> 
 </body>
 </html>

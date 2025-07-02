@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>convert</title>
+</head>
+<body>
+    <script>
+        let s = "99";
+        console.log(s + 78);  // 9978
+        console.log(Number(s) + 78); // 177
+        let num = 99;
+        console.log(typeof String(num));  // string
+
+        s = "99ranch";
+        console.log(parseInt(s));  // 99    
+        s = "ranch99";
+        console.log(parseInt(s));  // NaN
+
+        console.log(typeof s); // string
+        s = new String("ranch99"); 
+        console.log(typeof s); // object    
+
+        const arr = ["1", "2", "3"];
+        console.log(arr.toString());  // 1,2,3
+    </script>
+</body>
+</html>

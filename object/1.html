@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intro</title>
+</head>
+<body>
+    <script>
+        let user = {
+            name: "zyhang",
+            "my name": "zyhanghang"
+        }
+        console.log(user.name);
+        console.log(user["name"]);
+        user.age = 19;
+        for (key in user) {
+            console.log(user[key]);
+        }
+
+        user.get = function() {
+            return `${this.name} 的年龄是 ${this.age} 岁`;  // this 指向当前对象
+        }
+        console.log(user.get());
+        delete user.age;
+
+        console.log("--- 展开语法 ---");
+        let user2 = {
+            ...user,
+            age: 20
+        }
+        console.table(user2);
+
+        function upload(params) {
+            let config = {
+                method: "POST",
+                size: 100
+            }
+            config = {...config, ...params};
+            console.log(config);
+        }
+        upload({ size: 99});     // 传入的 size 覆盖默认的 size
+
+        console.log("--- 对象的解构赋值 ---");
+        let user3 = {
+            name: "hanhan",
+            age: 19
+        }   
+        let { name: n, age: a } = user3;
+        let { name, age } = user3;            // 如果和属性名一样，可以省略冒号后面的部分 
+        console.log(n, a);       
+        console.log(name, age);
+
+        function user4(name, age) {
+            console.log(name, age);
+        }
+        user4({ name: "fengge", age: 36 } );
+
+        let { name: nm } = user3; //也可以直接 name
+        console.log(nm);          // hanhan
+
+        let web = "web3", url = "li.com";
+        let obj = { web, url };
+        console.log(obj);
+
+        // 多重嵌套
+        let { name: { first, last } } = { name: { first: "zy", last: "hang" } };
+        console.log(first, last);
+
+        // 默认值
+        let { n1, n2 = "zyhang" } = { n1: "n1"};
+        console.log(n1, n2);      // 值不存时，n2 为默认值
+
+        // 解构作为函数参数
+        function show({ name, age }) {
+            console.log(name, age);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>args</title>
+</head>
+<body>
+    <script>
+        // 1. arguments
+        function show() {
+            console.log(arguments);
+            console.log(typeof arguments); // object
+            console.log(arguments.length);
+            console.log(arguments[0]);
+            console.log(arguments[1]);
+            console.log(arguments[2]);
+            console.log(arguments[3]);
+        }
+        show(1, 2, 3, 4);
+
+        // 2. rest
+        function show2(...args) {
+            console.log(args);
+            console.log(args.length);
+            console.log(args[0]);
+            console.log(args[1]);
+            console.log(args[2]);
+            console.log(args[3]);
+        }
+        show2(1, 2, 3, 4);
+
+        // 3. spread
+        let arr = [1, 2, 3, 4];
+        show2(...arr);
+
+        // 默认参数 
+        function avg(total, year=2) {
+            // year = year || 1;
+            return total / year;
+        }
+        console.log(avg(2000));
+
+        // 有默认参数的参数，放在后面
+        function sum(original, discount1=0, dicount2=0) {
+            return original * (1 - discount1) * (1 - dicount2);
+        }
+        console.log("final price", sum(2000, 0.1, 0.1));
+    </script>
+</body>
+</html>

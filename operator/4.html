@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>verification</title>
+</head>
+<body>
+    <form action="https://ww.google.com" id="form">
+        username <input type="text" name="user" />
+        <hr>
+        <input type="checkbox" name="copyright">接收协议</input>
+        <hr>
+        <button>submit</button>
+    </form>
+    <script>
+        function query(el) {
+            return document.querySelector(el);
+        }
+        query("#form").addEventListener("submit", function(e) {
+            let user = query('[name="user"]').value.trim();
+            let copyright = query('[name="copyright"]').checked;
+            console.log(copyright);
+            if (!user || !copyright) {
+                e.preventDefault();       // 表单无法提交
+                alert("input username and check the agreement");
+            }
+        });
+    </script>
+</body>
+</html>

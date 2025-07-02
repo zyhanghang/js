@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>obj copy</title>
+</head>
+<body>
+    <script>
+        console.log("--- 浅拷贝 ---");
+        // 不能 copy 对象中的对象
+        let hd = { name: "hd" };
+        let cp = {};
+        for (let key in hd) {
+            cp[key] = hd[key];
+        }
+        let obj = { ...hd }; 
+        //let obj = Object.assign({}, hd);
+        console.table(obj);
+
+        console.log("--- 深拷贝 ---");
+        // 1. 可以写递归函数
+        let obj2 = {
+            name: "obj2",
+            detail: {
+                gender: "male",
+                age: 18
+            }
+        }
+        let cp2 = JSON.parse(JSON.stringify(obj2));
+        console.table(cp2);
+        cp2.detail.age = 20;
+        console.table(cp2);
+    </script>  
+</body>
+</html>

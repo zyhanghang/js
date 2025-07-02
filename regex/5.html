@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原子表</title>
+</head>
+<body>
+    <script>
+        let hd = "abcdef222";
+        console.log(hd.match(/bc/));     // 匹配 "bc"
+        console.log(hd.match(/[ad]/g));  // a or d
+
+        let date = "2024/04-01";         // 匹配 - or /
+        let reg = /^\d{4}[-\/]\d{2}[-\/]\d{2}$/;  // 能匹配到
+        console.log(date.match(reg));  
+        // 如果希望两个连接符号一样
+        reg = /^\d{4}([-\/])\d{2}\1\d{2}$/;
+        console.log(date.match(reg));     // null
+        date = "2024/01/01";
+        console.log(date.match(reg));     // 匹配到
+
+        console.log(hd.match(/[0-9]+/));  // 222
+        console.log(hd.match(/[a-z]+/));  // abcdef
+        console.log(hd.match(/\w+/));     // abcdef222  \w 字母数字下划线一个或多个
+
+        // 排除匹配
+        console.log(hd.match(/[^0-9]+/));  // abcdef 排除数字
+
+        // 特殊字符在原子表保留原来意思
+        // ( ) . + 
+        let s = "(h.+d)";
+        console.log(s.match(/[().+]/g));      // ( ) 在原子表中是普通括号，在外面是原子组
+
+        s = `
+            test1
+            test2
+        `;
+        console.log(s.match(/.+/gs));
+        console.log(s.match(/[\s\S]+/)[0]);   // 匹配所有空白和非空白  
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>property</title>
+</head>
+<body>
+    <script>
+        const HOST = Symbol("主机");
+        console.log(HOST);
+        console.log([HOST]);
+        
+        const protecteds = Symbol();
+        class Common {
+            [HOST] = "https://hello.com";    // protected 在类及其子类中可以使用
+            constructor() {
+                this[protecteds] = {};
+                this[protecteds].host = "protecteds.host.com";
+            }
+            // 私有
+            #age = 20;
+
+            set host(url) {
+                if (!/^https?:/i .test(url)) {
+                    throw new Error("不是网址");
+                }
+                this[protecteds].host = url;
+            }
+            get host() {
+                return this[protecteds].host;
+            }
+        }
+        
+        class User extends Common {
+            //[HOST] = "https://hello.com";
+            constructor(name) {
+                super();                       // 子类构造函数中一定要调用父类构造函数            
+                this.name = name;
+            }
+            #gender = "male";
+            // set host(url) {
+            //     if (!/^https?:/i .test(url)) {
+            //         throw new Error("不是网址");
+            //     }
+            //     this[HOST] = url;
+            // }
+            // get host() {
+            //     return this[HOST];
+            // }
+            #check() {
+                if (this.#gender == "male") {
+                    return true;
+                }
+                return false;
+            }
+        }
+        let u = new User("hd");
+        console.log(u.host);
+        console.log(u);
+
+        console.log("--- public 都可以访问 ---");
+        console.log("--- protected 类和子类可以访问 ---");
+        console.log("--- private 只有类可以访问 ---");
+        // 加 #
+        console.log(u.age);     // undefined，age 为 Common 的私有
+        u.age = 30;
+        u.gender = "female";       // 这个 gender 是 public 的
+        //console.log(u.#gender);  // 这个是 private 的，外部不能访问
+        //console.log(u.#gender); // Uncaught SyntaxError: Private field '#gender' must be declared in an enclosing class
+        //console.log(u.#check());
+    </script>
+</body>
+</html>

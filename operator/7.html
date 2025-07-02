@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loop</title>
+</head>
+<body>
+    <script>
+        //document.write("while loop: ");
+        document.write(`<table border="1" width="100%">`);
+        let tr = 5;
+        while (tr-- != 0) {
+            document.write(`<tr>`);
+            let td = 3;
+            while (td-- != 0) {
+                document.write(`<td>`);
+                document.write(`${tr}, ${td} `);
+                document.write(`</td>`);
+            }
+            document.write(`</tr>`);
+        }
+        document.write(`</table>`);
+    </script>
+</body>
+</html>

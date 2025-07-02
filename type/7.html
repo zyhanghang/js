@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>math</title>
+</head>
+<body>
+    <script>
+        console.log(Math.PI);
+        console.log(Math.abs(-5));
+        console.log(Math.ceil(5.1));
+        console.log(Math.floor(5.9));
+        console.log(Math.round(5.5));
+        console.log(Math.max(1, 2, 3, 4, 5));
+        console.log(Math.min(1, 2, 3, 4, 5));
+        console.log(Math.pow(2, 3));
+        console.log(Math.random());
+        console.log(Math.sqrt(9));
+        
+        let arr = [1, 2, 3, 4, 5];
+        console.log(Math.max(arr));             // NaN
+        console.log(Math.max.apply(null, arr)); // 5 apply call
+        console.log(Math.max(...arr)); 
+    </script>
+</body>
+</html>

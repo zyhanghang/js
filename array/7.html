@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>const</title>
+    <title>every and some</title>
 </head>
 <body>
     <script>
-        const URL = "google.com";   // const 不能改变内存地址的引用
-        //URL = "meta.com";         // TypeError: Assignment to constant variable.
-        function show() {
-            const URL = "baidu.com";
-            console.log(URL);         // diff scope can change
-        }
-        show();
+        let arr = ["a", "b", "c", "de", "dc"];
+        let status = arr.every(function(value, index, arr) {
+            console.log(value, index, arr);
+            return value.length == 1; // 所有元素都返回为 true 时，status 为 true
+        });
+        console.log("every", status);
 
-        const CONFIG = {name: "name"}; // const 可以改变对象的属性
-        CONFIG.name = "name2";
-        console.log(CONFIG);           // {name: "name2"}
+        status = arr.some(function(value) {
+            console.log(value);
+            return value.length == 1;
+        })
+        console.log("some", status);
     </script>
 </body>
 </html>

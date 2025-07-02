@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>compare</title>
+</head>
+<body>
+    <input type="text", name="age" />
+    <span id="msg"></span>
+
+    <script>
+        let span = document.querySelector('#msg');
+        document.querySelector('[name="age"]').addEventListener('keyup', function() {
+            msg = '';
+            if (this.value > 90) {
+                msg = "cannot exceed 90";
+                span.innerHTML = msg;
+            }
+        });
+        // let a = 1, b = 1, c = "1";
+        // console.log(a < b);
+        // console.log(a == b);
+        // console.log(a == c);
+        // console.log(a === c);
+        // console.log(c < 2);       // true
+    </script>
+</body>
+</html>

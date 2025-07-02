@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if else</title>
+</head>
+<body>
+    <script>
+        // if, else if, else
+        // 三元运算符
+        let a = 1, b = 2;
+        let hd = a > b ? a : b;
+        console.log(hd);
+
+        function div(options={}) {
+            let div = document.createElement('div');
+            div.style.width = options.width ? options.width : "100px";
+            div.style.height = options.height ? options.height : "100px";
+            div.style.backgroundColor = options.bgColor ? options.bgColor : "red";
+            document.body.appendChild(div);
+        }
+        div({width: "300px", height: "600px", bgColor: "green"});
+    </script>
+</body>
+</html>

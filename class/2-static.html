@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>static</title>
+</head>
+<body>
+    <script>
+        function Web(url) {
+            this.url = url;
+        }
+        Web.url = "web.url";
+        let hd = new Web("xx.com");
+        console.log(hd); // 看原型的 constructor
+
+        class Request {
+            static host = "host.com";
+            api(url) {
+                return Request.host + `/${url}`;
+            }
+        }
+        let obj = new Request();
+        console.log(obj);
+        console.log(obj.api("article"));
+
+        // static methods
+        class User {
+            constructor(name) {
+                this.name = name;
+            }
+            show() {
+                console.log("prototype.show");
+            }
+            static show() {
+                console.log("static.show");
+            }
+
+            // 静态方法创建 object
+            static create(...args) {
+                //return new User(...args);
+                return this(...args);
+            }
+        }
+        let u = new User();
+        u.show();
+        User.show();
+
+        const data = [
+            { name: "js", price: 100 },
+            { name: "css", price: 212 },
+            { name: "html", price: 105 }
+        ];
+        class Lesson {
+            constructor(data) {
+                this.model = data;
+            }
+            get price() {                  // 访问器形式，不用写 ()
+                return this.model.price;
+            }
+            get name() {
+                return this.model.name;
+            }
+            static createBatch(data) {
+                return data.map(item => new Lesson(item));
+            }
+            static maxPrice(data) {
+                return data.sort((a, b) => b.price - a.price)[0];
+            }   
+        }
+        let lessons = Lesson.createBatch(data);
+        console.log(lessons);
+        console.log(Lesson.maxPrice(lessons).price);   // 212
+        console.log(Lesson.maxPrice(lessons).name);    // css
+    </script>
+</body>
+</html>

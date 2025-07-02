@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>断言匹配</title>
+</head>
+<body>
+    <main>
+        阿森纳冠军，阿森纳官网
+    </main>
+    <script>
+        let main = document.querySelector("main");
+        let reg = /阿森纳(?=官网)/g; 
+        main.innerHTML = main.innerHTML.replace(
+            reg,
+            `<a href="https://www.arsenal.com">$&</a>`
+        )
+
+        // 前面不是数字，的字母
+        reg = /(?<!\d+)[a-z]+/i;
+
+    </script>
+</body>
+</html>

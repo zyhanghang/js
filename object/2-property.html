@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>property</title>
+</head>
+<body>
+    <script>
+        let hd = {};
+        hd.name = "hd";
+        hd.age = 18;
+        hd["gender"] = "male";
+        console.table(hd);
+
+        delete hd.name;
+        console.log(hd.hasOwnProperty("name"));  // false
+        console.log(hd.hasOwnProperty("age"));   // true
+
+        let arr = [1, 2, 3];
+        console.log(arr);
+        console.log(arr.hasOwnProperty("length"));  // true
+        console.log('concat' in arr); // true  包括检测原型链上的属性
+
+        // 设置远行
+        let a = { name: "hd" };
+        let b = { gender: "male"};
+        Object.setPrototypeOf(a, b);    // 设置 a 的原型为 b
+        console.log(a);
+        console.log('gender' in a);     // true
+
+        // assign
+        let options = { name: "hd" };
+        // config = {...config, ...params};
+        options = Object.assign(options, { name: "update", age: 18 });
+        console.log(options);
+
+        console.log(Object.keys(options));    // ["name", "age"]
+        console.log(Object.values(options));  // ["update", 18]
+        console.log(JSON.stringify(Object.entries(options), null, 2)); // [["name", "update"], ["age", 18]]
+    </script>
+</body>
+</html>

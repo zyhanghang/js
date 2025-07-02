@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>super</title>
+</head>
+<body>
+    <script>
+        class User {
+            show() {
+                console.log("user.show");
+            }
+        }
+        class Admin extends User {
+            show() {
+                super.show();
+                console.log("admin show");
+            }
+        }
+        console.dir(Admin);
+        let hd = new Admin();
+        hd.show();
+
+        // super 原理
+        let jd = {
+            name: "hd.name",
+            show() {
+                //console.log("jd.show");
+                console.log(this.name);
+                //this.__proto__.show.call(this);  // repreated print xj.name stack oevrflow 
+            }
+        }
+        let xj = {
+            __proto__: jd,             // 继承
+            name: "xj.name",
+            show() {
+                //this.__proto__.show.call(this);   // 否则 this 将会是 jd
+                                                  // 只想用 jd 的方法，已经当前对象的 属性
+                                                  // NOTE: 值适用于两层 
+                //console.log("xj.show");
+                super.show();
+            }
+        }
+        console.log(xj);
+        xj.show();              // xj.name
+
+        console.log("--- 在子类 constructor 中执行 super ---");
+        /**
+         * constructor(...args) {
+         *      super(...args)
+         * }
+        */
+       
+    </script>
+</body>
+</html>

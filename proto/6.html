@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承</title>
+</head>
+<body>
+    <script>
+        function User(name) {
+            this.name = name;
+        }
+        User.prototype.show = function() {
+            console.log(this.name);
+        };
+        let lilei = new User("lilei");
+        let hanmeimei = new User("hanmeimei");
+        lilei.show();       // lilei
+        hanmeimei.show();   // hanmeimei
+
+        // 原型的继承，而不是改变构造函数的原型
+        function User() {
+        }
+        User.prototype.name = function() {
+            console.log("name");
+        };
+        let hd = new User();
+        hd.name();                // name
+
+        function Admin() {
+        }
+        //Admin.prototype = User.prototype;
+
+        // 通过原型链继承
+        Admin.prototype.__proto__ = User.prototype;
+        Admin.prototype.role = function() {
+            console.log("role");
+        };
+
+        let a = new Admin();
+        a.name();                 // name
+        a.role();                 // role
+    </script>
+</body>
+</html>

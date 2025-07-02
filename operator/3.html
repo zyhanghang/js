@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logic</title>
+</head>
+<body>
+    <script>
+        // let a = 1, b = 1;
+        // if (a == 1 && b == 1) {
+        //     console.log("a=1,b=1");
+        // }
+        // if (a == 1 || b == 2) {
+        //     console.log("a=1");
+        // }
+
+        // short ciruit
+        let a = 1, b = 0;
+        if (a || b) {
+            console.log(true); // true
+        }
+        a = 6;
+        let f = a || b;
+        console.log(f);        // 6   赋值运算符的返回值是赋值的值
+        let sex = prompt("input sec") || "N/A";
+        console.log(sex);
+
+        function star(num) {
+            return "*".repeat(num || 5);
+        }
+        console.log(star());
+        console.log(star(20));
+    </script>
+</body>
+</html>

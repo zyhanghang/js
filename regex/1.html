@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        hello,world
+    </div>
+    <script>
+        let s = "hello";
+        console.log(/u/.test(s));  // false, no 'u' in s
+        let a = 'u';
+        console.log(eval(`/${a}/`).test(s)); // false 可用变量
+
+        let reg = new RegExp("h", "g");
+        console.log(reg.test(s));  // true
+
+        // let con = prompt("input the content you want to search");
+        // reg = new RegExp(con, "g");
+        // let div = document.querySelector("div");
+        // div.innerHTML = div.innerHTML.replace(reg, search => {
+        //     return `<span style="color:red">${search}</span>`
+        // });
+
+        // 或者 |
+        console.log(/@|h/.test(s)); // true
+        let tel = "010-9998888";
+        console.log(/(010|020)\-\d{7,8}/.test(tel)); // true
+
+        reg = /[23456]/;            // 或者
+        console.log(reg.test(tel)); // false
+    </script>
+</body>
+</html>

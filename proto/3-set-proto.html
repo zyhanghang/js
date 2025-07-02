@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let hd = {name: "hd"};
+        let parent = { 
+            name: "parent",
+            show() {
+                console.log(this.name); // 调用者的 this
+            }
+        };
+        console.log(hd.__proto__ === Object.prototype);      // true
+
+        // 设置原型对象
+        Object.setPrototypeOf(hd, parent);
+        console.log(hd); 
+        console.log(parent.__proto__ === Object.prototype);  // true
+        console.log(hd.__proto__ === parent);                // true
+
+        hd.show();       // hd
+        parent.show();   // parent
+
+        // 查看原型
+        console.log(Object.getPrototypeOf(hd));
+    </script>
+</body>
+</html>

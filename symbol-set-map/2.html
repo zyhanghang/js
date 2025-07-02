@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>set and weakset</title>
+</head>
+<body>
+    <script>
+        let set = new Set();
+        set.add(1);
+        set.add(1);
+        set.add("1");      // 严格类型，obj 中的 key 都会转化成字符串
+        set.add(2);
+        console.log(set);
+
+        set = new Set([1, 2, 3, 4, 4, 4, 4]);
+        console.log(set.size);
+        // new Set("abc") // Set(3) {"a", "b", "c"} 字符串展开处理
+        console.log(set.has(1));
+        console.log(set.delete(1));
+        console.log(set.values());
+
+        // set to array
+        let arr = Array.from(set);
+        console.log(arr);
+        console.log([...set]);
+
+        // 并集
+        let a = new Set([1, 2, 3]);
+        let b = new Set([4, 3, 2]);
+        let union = new Set([...a, ...b]);
+
+        // 交集
+        let intersection = new Set([...a].filter(x => b.has(x)));
+
+        // 差集
+        let difference = new Set([...a].filter(x => !b.has(x)));
+
+
+        console.log("--- weakset ---");
+        // weakset 只能存放对象，不会检查对象是否被垃圾回收
+        let ws = new WeakSet(); // 不能string放构造器里
+        //ws = new WeakSet(["a", "b"]); // TypeError: Invalid value used in weak set
+        ws.add(["a"]);     
+        console.log(ws);
+
+        let obj = {a: 1};
+        let edu = obj;
+        let ws2 = new WeakSet();
+        ws2.add(obj);
+        //console.log(ws);
+        obj = null; 
+        edu = null;
+        console.log(ws2);        
+    </script>
+</body>
+</html>

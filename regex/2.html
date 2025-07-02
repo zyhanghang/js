@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>转义</title>
+</head>
+<body>
+    <script>
+        // . 除换行外任何自负
+        let price = 23.34;
+        let p2 = 2334;
+        console.log(/\d+.\d+/.test(price)); // true
+        console.log(/\d+.\d+/.test(p2));    // true, not expected
+
+        console.log(/\d+\.\d+/.test(p2));   // false
+
+        let reg = new RegExp("\d+\.\d+");
+        console.log(reg.test(price));        // false
+        // 需要对 \ 进行转义
+        reg = new RegExp("\\d+\\.\\d+");
+        console.log(reg.test(price));        // true
+
+        // 边界
+        let s = "abcdfefffe";
+        console.log(/^\d$/.test(s));             // false   起始和结束都是 数字
+        console.log(/^[a-z]{3,10}$/.test(s));    // true    字母, 严格 3-10 位
+    </script>
+</body>
+</html>

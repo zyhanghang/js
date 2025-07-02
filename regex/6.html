@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原子组</title>
+</head>
+<body>
+    <script>
+        // 匹配 html 的 h1 到 h6 标签
+        let hd = `
+            <h1>hello, world</h1>
+            <h2>nihao</h2>
+        `;
+        // index 0 是匹配的 完整字符串
+        // index 1 and 2 分别是 h1 和 其内容 (两个原子组，非全局匹配下)
+        let reg = /<(h[1-6])>([\s\S]*)<\/\1>/gi;
+        console.dir(hd.match(reg));
+
+        console.log(hd.replace(reg, `<p>$2</p>`));  // 替换成第二个原子组的内容
+        let res = hd.replace(reg, (p0, p1, p2) => {
+            console.log(p0);
+            console.log(p1);
+            console.log(p2);
+            return `<span>${p2}</span>`
+        });
+        console.log(res);
+        // 如果有嵌套组，按照 ( 顺序取
+        // 不记录嵌套分组
+
+        hd = "https://www.google.com"
+        reg = /https:\/\/(\w+\.\w+\.(?:com|org|cn))/;  // ?: 不记录分组
+        console.dir(hd.match(reg));
+
+        // 满足所有 或 满足任意一个 reg
+        let regs = [/^[a-z]/i, /[0-9]$/];
+        let s = "a9a";
+        console.log(regs.every(e => e.test(s)));
+        
+        s = "123345";
+        reg = /\d{3,10}?/;          // 禁止贪婪
+        console.log(s.match(reg));
+
+        // 禁止贪婪在 html 标签中的应用
+        reg = /<span>([\s\S]+?)<\/span>/gi; 
+
+        // $& 匹配到的内容
+        // $` 匹配到内容的前面
+        // $' 匹配到内容的后面
+
+        // 给组起别名 (?<name1>)        $<name1>
+    </script>
+</body>
+</html>

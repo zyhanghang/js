@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol</title>
+</head>
+<body>
+    <script>
+        // Symbol 是一种新的基本数据类型，表示独一无二的值
+        // Symbol 值通过 Symbol 函数生成，Symbol 函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述
+        // Symbol 函数的参数只是表示对当前 Symbol 值的描述，相同参数的 Symbol 函数返回值是不相等的
+        let s1 = Symbol("foo");     // "foo" 只是一个描述，不影响 Symbol 的值
+        let s2 = Symbol("foo");
+        console.log(typeof s1);     // "symbol"
+        console.log(s1.toString()); // "Symbol(foo)"
+        console.log(s1 === s2);     // false
+
+        let a = Symbol.for("a");    // Symbol.for 方法接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值
+        let b = Symbol.for("a");
+        console.log(a == b);        // true
+ 
+
+        // Symbol 值不能与其他类型的值进行运算，会报错
+        // console.log(s1 + "bar");    // TypeError: Cannot convert a Symbol value to a string
+
+        // Symbol 值可以显式转为字符串
+        console.log(String(s1));    // "Symbol(foo)"
+        console.log(s1.toString());  // "Symbol(foo)"
+
+        console.log("--- symbol for distinct key ---");
+        let grades = {
+            "lilei": {js: 100, css: 89}, 
+            "lilei": {js: 98, css: 99}
+        };
+        console.log(grades);  // only one lilei
+        let stu1 = {
+            name: "lilei",
+            key: Symbol()
+        };
+        let stu2 = {
+            name: "lilei",
+            key: Symbol()
+        };
+        grades = {
+            // 对象中使用 变量，要 []
+            [stu1.key]: {js: 100, css: 89}, 
+            [stu2.key]: {js: 98, css: 99}
+        };
+        console.log(grades);
+
+
+        console.log("--- symbol as property name, cannot used with . but can used with [] ---");
+        // Symbol 值可以作为对象属性名
+        let mySymbol = Symbol("itsSymbol");
+        let obj = {};
+        obj.name = "lilei";
+        obj[mySymbol] = "Hello";
+        console.log(obj[mySymbol]);  // "Hello"
+
+        // Symbol 值作为对象属性名时，不能用点运算符
+        // obj.mySymbol = "World";     // obj.mySymbol is undefined
+        // console.log(obj.mySymbol);  // undefined
+
+        // Symbol 值作为对象属性名时，可以用方括号运算符
+        let obj2 = {
+            [mySymbol]: "World"
+        };
+        console.log(obj2[mySymbol]); // "World"
+
+        // Symbol 值作为对象属性名时，该属性不会出现在 for...in、for...of 循环中
+        for (let key in obj) {
+            console.log(key);       // 无输出
+        }
+        console.log(Object.keys(obj));  // []
+        console.log(Object.getOwnPropertyNames(obj));  // []
+        console.log(JSON.stringify(obj));  // {}
+
+        // Object.getOwnPropertySymbols 方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值
+        console.log("--- Object.getOwnPropertySymbols 方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值 ---");
+        console.log(Object.getOwnPropertySymbols(obj));  // [Symbol()]
+
+        console.log("--- Reflect.ownKeys 方法返回所有类型的键名，包括常规键名 ---"); 
+        for (let key of Reflect.ownKeys(obj)) {
+            console.log(key);                        // Symbol()
+        }
+    </script>
+</body>
+</html>

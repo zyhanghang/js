@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元字符</title>
+</head>
+<body>
+    <script>
+        let year = "1234";
+        console.log(year.match(/\d/g)); // 加 g 表示全局，匹配所有，否则就会在找到第一个匹配后停止
+
+        let hd = "houdun   2023";
+        console.log(hd.match(/\d+/));   // 匹配数字
+        console.log(hd.match(/\D+/));   // 匹配非数字
+        console.log(hd.match(/\s+/));   // 匹配空白
+        console.log(hd.match(/\S+/g));  // 匹配非空白
+    </script>
+</body>
+</html>

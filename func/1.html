@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>func is obj</title>
+    <script src="1.js"></script>
+    <script src="2.js"></script>
+</head>
+<body>
+    <!-- <script src="1.js"></script>
+    <script src="2.js"></script> -->
+    <script>
+        let fc = new Function("title", "console.log(title);");
+        fc("hi");
+
+        fc = function (title) {
+            console.log(title);
+        };                                   
+        fc("hi, title");
+
+        let user = {
+            name: null,
+            // 可以去掉 function 简写
+            setUserName: function (name) {
+                this.name = name;
+            },
+            getUserName: function () {
+                return this.name;
+            }
+        };
+        user.setUserName("lilei");
+        console.log(user.getUserName());
+
+        // 会覆盖原有的 window.screenLeft   
+        function screenLeft() {
+            console.log("cs");
+        }
+        console.log("覆盖后", window.screenLeft);
+        // 函数最好包括在class中
+
+
+        let fcc = function () {
+            console.log("匿名函数");
+        };
+        fcc();
+        console.log(fcc instanceof Object);  // true
+        let cms = fcc;
+        cms();                    // 可以赋值给变量
+        show();                   // 可以提前调用
+        function show() {
+            console.log("show");
+        }
+
+        console.log("--- 立即执行函数 与 块作用域冲突 ---");
+        // 立即执行函数
+        // 引入的 1.js 和 2.js 有相同的变量名，会冲突   
+        // 怎么确定一定要执行 2.js
+        js2.hd();       // 2-hd
+    </script> 
+</body>
+</html>
